@@ -1,4 +1,0 @@
-tldextract
-argparse
-termcolor
-dnspython
