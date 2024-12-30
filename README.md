@@ -1,26 +1,31 @@
 # Altdns - Subdomain discovery 
-Altdns is a DNS recon tool that allows for discovering subdomains that conform to patterns. It takes in words that could be present in subdomains under a domain (such as test, dev, staging) and a list of subdomains you know.
+A DNS recon tool included in this package makes it possible to find subdomains that follow patterns. Altdns accepts a list of subdomains that you are aware of, as well as phrases that might appear in subdomains under a domain (e.g., test, dev, staging).
+
 
 # Installation
-Python 2:
-
-pip install py-altdns==1.0.0
-
-Python 3:
-
-pip3 install py-altdns==1.0.2
+ sudo apt install altdns
 
 # Usage
 ## altdns -i subdomains.txt -o data_output -w words.txt -r -s results_output.txt
 
-subdomains.txt contains the known subdomains for an organization
-data_output is a file that will contain the massive list of altered and permuted subdomains
+usage: altdns [-h] -i INPUT -o OUTPUT [-w WORDLIST] [-r] [-n] [-e] [-d DNSSERVER] [-s SAVE] [-t THREADS]
 
-words.txt is your list of words that you'd like to permute your current subdomains with (i.e. admin, staging, dev, qa) - one word per line
--r command resolves each generated, permuted subdomain
+options:
+  -h, --help            show this help message and exit
+  -i INPUT, --input INPUT
+                        List of subdomains input
+  -o OUTPUT, --output OUTPUT
+                        Output location for altered subdomains
+  -w WORDLIST, --wordlist WORDLIST
+                        List of words to alter the subdomains with
+  -r, --resolve         Resolve all altered subdomains
+  -n, --add-number-suffix
+                        Add number suffix to every domain (0-9)
+  -e, --ignore-existing
+                        Ignore existing domains in file
+  -d DNSSERVER, --dnsserver DNSSERVER
+                        IP address of resolver to use (overrides system default)
+  -s SAVE, --save SAVE  File to save resolved altered subdomains to
+  -t THREADS, --threads THREADS
+                        Amount of threads to run simultaneously
 
--s command tells altdns where to save the results of the resolved permuted subdomains. results_output.txt will contain the final list of permuted subdomains found that are valid and have a DNS record.
-
--t command limits how many threads the resolver will use simultaneously
-
--d 1.2.3.4 overrides the system default DNS resolver and will use the specified IP address as the resolving server. Setting this to the authoritative DNS server of the target domain may increase resolution performance
